@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Friend } from './../models/Friend';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
+  model: Friend = new Friend();
+
   constructor() {}
 
+  resgister(){
+    console.log("Register friend");
+    //
+
+  this.model = new Friend();
+ }
 }
