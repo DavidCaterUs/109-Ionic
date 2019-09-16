@@ -18,6 +18,7 @@ export class Tab1Page {
     //load DataService
     this.data.getAllPosts().subscribe(res => {
       console.log('all post changed', res);
+      this.postToShow = [];
 
       console.log('1');
       // iterate over the res to fix the createdOn format
@@ -29,6 +30,9 @@ export class Tab1Page {
         console.log('2.5');
         post.createdOn = new firestore.Timestamp(co.seconds, co.nanoseconds).toDate();
         console.log('3');
+        if(post.to == "Everyone" || post.to == "Kleibert" || post.from == "Kleibert"){
+          this.postToShow.push(post);
+        }
       }
 
         this.postToShow = res;
