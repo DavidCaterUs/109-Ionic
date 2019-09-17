@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from './../service/data.service';
 import { Post } from '../models/Post';
 import { firestore } from 'firebase';
+import { SharedService } from './../service/shared.service';
 
 
 
@@ -14,7 +15,7 @@ export class Tab1Page {
 
   postToShow: Post[] = [];
 
-  constructor (private data: DataService) {
+  constructor (private data: DataService, shared: SharedService) {
     //load DataService
     this.data.getAllPosts().subscribe(res => {
       console.log('all post changed', res);
@@ -30,12 +31,10 @@ export class Tab1Page {
         console.log('2.5');
         post.createdOn = new firestore.Timestamp(co.seconds, co.nanoseconds).toDate();
         console.log('3');
-        if(post.to == "Everyone" || post.to == "Kleibert" || post.from == "Kleibert"){
+        if(post.to == "Everyone" || post.to == shared.userName || post.from == shared.userName){
           this.postToShow.push(post);
         }
       }
-
-        this.postToShow = res;
     });
   }
 }

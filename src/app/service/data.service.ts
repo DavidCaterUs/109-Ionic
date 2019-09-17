@@ -3,6 +3,7 @@ import { Post } from './../models/Post';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Friend } from '../models/Friend';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,23 @@ export class DataService {
     this.friendCollection.add(item);
   }
 
+  public removeFriend(objId : string){
+    //remove the obj from database
+    console.log("removong friend", objId)
+  this.fb.doc('friends/' + objId).delete();
+  }
+
   public getAllFriends(){
-    this.allFriends = this.friendCollection.valueChanges();
+    this.allFriends = this.friendCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(m =>{
+          let id = m.payload.doc.id;
+          let friend : Friend = m.payload.doc.data();
+          friend.fbId = id;
+          return friend;
+        });
+      })
+    );
     return this.allFriends;
   }
 }
