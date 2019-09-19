@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondary">
     <ion-title>
       Register new post!
     </ion-title>
@@ -25,12 +25,12 @@
       <ion-select-option value="Everyone">Everyone</ion-select-option>
   <ion-select-option *ngFor = "let friend of friendsToDisplay" [value]="friend.name">
   {{friend.name}}</ion-select-option>
-  
+
     </ion-select>
   </ion-item>
 
 
-    <ion-button expand="block" size="large" color="primary" (click)="post()">Full Button</ion-button>
+    <ion-button expand="block" size="large" color="secondary" (click)="post()">Register</ion-button>
 
 
 

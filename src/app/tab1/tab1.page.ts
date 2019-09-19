@@ -21,16 +21,16 @@ export class Tab1Page {
       console.log('all post changed', res);
       this.postToShow = [];
 
-      console.log('1');
+
       // iterate over the res to fix the createdOn format
 
       for(let i=0; i < res.length; i++){
-        console.log('2');
+
         let post = res[i];
         let co: any = post.createdOn;
-        console.log('2.5');
+
         post.createdOn = new firestore.Timestamp(co.seconds, co.nanoseconds).toDate();
-        console.log('3');
+      
         if(post.to == "Everyone" || post.to == shared.userName || post.from == shared.userName){
           this.postToShow.push(post);
         }
